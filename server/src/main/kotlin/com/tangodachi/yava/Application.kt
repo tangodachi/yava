@@ -1,9 +1,12 @@
 package com.tangodachi.yava
 
+import com.tangodachi.yava.authentication.AuthenticationApi
+import com.tangodachi.yava.authentication.RequestSignInCodeParameters
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
+import io.ktor.server.request.receive
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
@@ -13,6 +16,8 @@ fun main() {
 }
 
 fun Application.module() {
+    contentNegotiation()
+
     routing {
         post("/requestSignInCode") {
             call.respond(HttpStatusCode.OK)
