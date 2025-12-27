@@ -18,6 +18,13 @@ import yava.composeapp.generated.resources.sign_in_label_email
 
 @Composable
 fun SignInPage() {
+    SignInPage(onRequest = {})
+}
+
+@Composable
+fun SignInPage(
+    onRequest: () -> Unit
+) {
     Column(
         Modifier
             .padding(horizontal = 16.dp)
@@ -33,7 +40,7 @@ fun SignInPage() {
         Spacer(modifier = Modifier.weight(1f))
 
         Button(
-            onClick = {},
+            onClick = onRequest,
             modifier = Modifier
                 .align(Alignment.End)
         ) {
