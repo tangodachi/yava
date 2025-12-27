@@ -15,10 +15,20 @@ direction TB
         class AuthenticationImplementation {
         }
 
+        class AuthenticationSource {
+	        requestSignInCode(email: String)
+        }
+
+        class RemoteAuthenticationSource {
+        }
+
 	}
 
 	<<Interface>> Authentication
+	<<Interface>> AuthenticationSource
 
-    RequestSignInCode ..> Authentication
-    AuthenticationImplementation ..|> Authentication   
+    RequestSignInCode --> Authentication
+    AuthenticationImplementation ..|> Authentication
+    AuthenticationImplementation --> AuthenticationSource
+    RemoteAuthenticationSource ..|> AuthenticationSource
 ```
