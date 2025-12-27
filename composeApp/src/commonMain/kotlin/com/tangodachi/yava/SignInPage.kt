@@ -18,14 +18,16 @@ import yava.composeapp.generated.resources.sign_in_label_email
 
 @Composable
 fun SignInPage() {
-    Column {
+    Column(
+        Modifier
+            .padding(horizontal = 16.dp)
+            .padding(bottom = 32.dp)
+    ) {
         TextField(
             label = { Text(stringResource(Res.string.sign_in_label_email)) },
             value = "",
             onValueChange = {},
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp)
+            modifier = Modifier.fillMaxWidth()
         )
 
         Spacer(modifier = Modifier.weight(1f))
