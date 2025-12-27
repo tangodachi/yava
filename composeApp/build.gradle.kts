@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.ksp)
 }
 
 kotlin {
@@ -51,6 +52,9 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
+            implementation(libs.koin.annotations)
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose)
             implementation(projects.shared)
         }
         commonTest.dependencies {
@@ -88,5 +92,13 @@ android {
 
 dependencies {
     debugImplementation(compose.uiTooling)
+
+    add("kspCommonMainMetadata", libs.koin.ksp.compiler)
+
+    add("kspAndroid", libs.koin.ksp.compiler)
+    add("kspIosArm64", libs.koin.ksp.compiler)
+    add("kspIosSimulatorArm64", libs.koin.ksp.compiler)
+    add("kspJs", libs.koin.ksp.compiler)
+    add("kspWasmJs", libs.koin.ksp.compiler)
 }
 
