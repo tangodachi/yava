@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name = "sign_in_label_email">Email</string>
     <string name="top_bar_title_sign_in">Sign In</string>
 </resources>
