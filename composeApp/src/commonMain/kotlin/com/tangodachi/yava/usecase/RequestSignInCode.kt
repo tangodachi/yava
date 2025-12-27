@@ -5,7 +5,7 @@ import org.koin.core.annotation.Factory
 @Factory
 class RequestSignInCode {
     operator fun invoke(email: String) {
-        TODO()
+        println("Requesting sign-in code for email: $email")
     }
 }
 

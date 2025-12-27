@@ -5,6 +5,10 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -12,17 +16,27 @@ import com.tangodachi.design.Button
 import com.tangodachi.design.Text
 import com.tangodachi.design.TextField
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.koinInject
+import com.tangodachi.yava.usecase.RequestSignInCode
 import yava.composeapp.generated.resources.Res
 import yava.composeapp.generated.resources.sign_in_action_request_code
 import yava.composeapp.generated.resources.sign_in_label_email
 
 @Composable
-fun SignInPage() {
-    SignInPage(onRequest = {})
+fun SignInPage(requestSignInCode: RequestSignInCode = koinInject()) {
+    var email by remember { mutableStateOf("") }
+
+    SignInPage(
+        email = email,
+        onEmailChange = { email = it },
+        onRequest = { requestSignInCode(email) }
+    )
 }
 
 @Composable
 fun SignInPage(
+    email: String,
+    onEmailChange: (String) -> Unit,
     onRequest: () -> Unit
 ) {
     Column(
@@ -32,8 +46,8 @@ fun SignInPage(
     ) {
         TextField(
             label = { Text(stringResource(Res.string.sign_in_label_email)) },
-            value = "",
-            onValueChange = {},
+            value = email,
+            onValueChange = onEmailChange,
             modifier = Modifier.fillMaxWidth()
         )
 
