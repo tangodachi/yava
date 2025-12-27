@@ -1,11 +1,11 @@
 package com.tangodachi.yava.usecase
 
+import com.tangodachi.yava.authentication.Authentication
 import org.koin.core.annotation.Factory
 
 @Factory
-class RequestSignInCode {
+class RequestSignInCode(private val authentication: Authentication) {
     operator fun invoke(email: String) {
-        println("Requesting sign-in code for email: $email")
+        authentication.requestSignInCode("q@q.be")
     }
 }
-
