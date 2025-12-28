@@ -1,5 +1,6 @@
 package com.tangodachi.yava
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -30,6 +31,7 @@ import yava.composeapp.generated.resources.sign_in_label_email
 fun SignInPage(requestSignInCode: RequestSignInCode = koinInject()) {
     var email by remember { mutableStateOf("") }
     val scope = rememberCoroutineScope()
+    var signInCodeVisible by remember { mutableStateOf(false) }
 
     SignInPage(
         email = email,
@@ -37,8 +39,10 @@ fun SignInPage(requestSignInCode: RequestSignInCode = koinInject()) {
         onRequest = {
             scope.launch {
                 requestSignInCode(email)
+                signInCodeVisible = true
             }
-        }
+        },
+        signInCodeVisible = signInCodeVisible,
     )
 }
 
@@ -46,7 +50,8 @@ fun SignInPage(requestSignInCode: RequestSignInCode = koinInject()) {
 fun SignInPage(
     email: String,
     onEmailChange: (String) -> Unit,
-    onRequest: () -> Unit
+    onRequest: () -> Unit,
+    signInCodeVisible: Boolean,
 ) {
     Column(
         Modifier
@@ -62,13 +67,14 @@ fun SignInPage(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        TextField(
-            value = "",
-            onValueChange = {},
-            label = { Text(stringResource(Res.string.sign_in_label_code)) },
-            modifier = Modifier.fillMaxWidth()
-        )
-
+        AnimatedVisibility(visible = signInCodeVisible) {
+            TextField(
+                value = "",
+                onValueChange = {},
+                label = { Text(stringResource(Res.string.sign_in_label_code)) },
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
         Spacer(modifier = Modifier.weight(1f))
 
         Button(
