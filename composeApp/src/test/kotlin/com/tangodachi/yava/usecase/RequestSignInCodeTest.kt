@@ -8,6 +8,7 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.koin.core.annotation.Factory
 import org.koin.ksp.generated.module
 import org.koin.test.KoinTest
 import org.koin.test.KoinTestRule
@@ -25,7 +26,6 @@ class RequestSignInCodeTest : KoinTest {
     val koinTestRule = KoinTestRule.create {
         modules(AppModule().module)
     }
-
 
     @Before
     fun setup() {
