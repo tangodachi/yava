@@ -47,4 +47,16 @@ class ValidateSignInCodeTest : KoinTest {
         assertEquals(expectedEmail, authentication.email)
         assertEquals(expectedCode, authentication.code)
     }
+
+    @Test
+    fun `expect validateSignInCode with email 2`() = runTest {
+        val expectedEmail = "a@q.com"
+        val expectedCode = "123456"
+
+        validateSignInCode(expectedEmail, expectedCode)
+
+        assertTrue(authentication.validateSignInCode)
+        assertEquals(expectedEmail, authentication.email)
+        assertEquals(expectedCode, authentication.code)
+    }
 }
