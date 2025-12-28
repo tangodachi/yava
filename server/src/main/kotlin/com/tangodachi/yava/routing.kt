@@ -2,6 +2,7 @@ package com.tangodachi.yava
 
 import com.tangodachi.yava.authentication.AuthenticationApi
 import com.tangodachi.yava.authentication.RequestSignInCodeParameters
+import com.tangodachi.yava.authentication.ValidateSignInCodeParameters
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.Application
 import io.ktor.server.request.receive
@@ -17,7 +18,7 @@ fun Application.routing() {
             call.respond(HttpStatusCode.OK)
         }
         post(AuthenticationApi.validateSignInCode) {
-            println("Received validate sign-in code request")
+            println("Received ${call.receive<ValidateSignInCodeParameters>()}")
             call.respond(HttpStatusCode.OK)
         }
     }

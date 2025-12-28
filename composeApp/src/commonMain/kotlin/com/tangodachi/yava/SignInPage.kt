@@ -21,6 +21,7 @@ import com.tangodachi.design.TextField
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import com.tangodachi.yava.usecase.RequestSignInCode
+import com.tangodachi.yava.usecase.ValidateSignInCode
 import kotlinx.coroutines.launch
 import yava.composeapp.generated.resources.Res
 import yava.composeapp.generated.resources.sign_in_action_request_code
@@ -29,18 +30,29 @@ import yava.composeapp.generated.resources.sign_in_label_code
 import yava.composeapp.generated.resources.sign_in_label_email
 
 @Composable
-fun SignInPage(requestSignInCode: RequestSignInCode = koinInject()) {
+fun SignInPage(
+    requestSignInCode: RequestSignInCode = koinInject(),
+    validateSignInCode: ValidateSignInCode = koinInject()
+) {
     var email by remember { mutableStateOf("") }
+    var code by remember { mutableStateOf("") }
     val scope = rememberCoroutineScope()
     var signIncodeRequested by remember { mutableStateOf(false) }
 
     SignInPage(
         email = email,
+        code = code,
         onEmailChange = { email = it },
+        onCodeChange = { code = it },
         onRequest = {
             scope.launch {
                 requestSignInCode(email)
                 signIncodeRequested = true
+            }
+        },
+        onSignIn = {
+            scope.launch {
+                validateSignInCode(email, code)
             }
         },
         signIncodeRequested = signIncodeRequested,
@@ -50,8 +62,11 @@ fun SignInPage(requestSignInCode: RequestSignInCode = koinInject()) {
 @Composable
 fun SignInPage(
     email: String,
+    code: String,
     onEmailChange: (String) -> Unit,
+    onCodeChange: (String) -> Unit,
     onRequest: () -> Unit,
+    onSignIn: () -> Unit,
     signIncodeRequested: Boolean,
 ) {
     Column(
@@ -70,8 +85,8 @@ fun SignInPage(
 
         AnimatedVisibility(visible = signIncodeRequested) {
             TextField(
-                value = "",
-                onValueChange = {},
+                value = code,
+                onValueChange = onCodeChange,
                 label = { Text(stringResource(Res.string.sign_in_label_code)) },
                 modifier = Modifier.fillMaxWidth()
             )
@@ -92,7 +107,7 @@ fun SignInPage(
             visible = signIncodeRequested,
             modifier = Modifier.align(Alignment.End)
         ) {
-            Button(onClick = {}) {
+            Button(onClick = onSignIn) {
                 Text(stringResource(Res.string.sign_in_action_sign_in))
             }
         }
