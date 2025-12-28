@@ -3,6 +3,8 @@ package com.tangodachi.yava.usecase
 import com.tangodachi.yava.AppModule
 import com.tangodachi.yava.authentication.Authentication
 import com.tangodachi.yava.authentication.AuthenticationMock
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -28,7 +30,7 @@ class RequestSignInCodeTest : KoinTest {
     @Before
     fun setup() {
         MockProvider.register { clazz ->
-            when(clazz) {
+            when (clazz) {
                 Authentication::class -> authentication
                 else -> throw IllegalArgumentException("Unknown class: $clazz")
             }
@@ -37,7 +39,7 @@ class RequestSignInCodeTest : KoinTest {
     }
 
     @Test
-    fun expectRequestSignInCode() {
+    fun expectRequestSignInCode() = runTest {
         val expectedEmail = "q@q.be"
 
         requestSignInCode(expectedEmail)
@@ -47,7 +49,7 @@ class RequestSignInCodeTest : KoinTest {
     }
 
     @Test
-    fun `expect requestSignCode with email2`() {
+    fun `expect requestSignCode with email2`() = runTest {
         val expectedEmail = "w@w.be"
 
         requestSignInCode(expectedEmail)

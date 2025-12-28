@@ -63,7 +63,6 @@ kotlin {
         }
         commonTest.dependencies {
             implementation(libs.koin.test)
-//            implementation(libs.koin.test.junit4)
             implementation(libs.kotlin.test)
         }
         iosMain.dependencies {
@@ -104,6 +103,8 @@ android {
 
 dependencies {
     debugImplementation(compose.uiTooling)
+    testImplementation(libs.koin.test.junit4)
+    testImplementation(libs.kotlinx.coroutines.test)
 
     add("kspCommonMainMetadata", libs.koin.ksp.compiler)
 
