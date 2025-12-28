@@ -3,5 +3,6 @@
     <string name="sign_in_action_request_code">Send code</string>
     <string name="sign_in_header_request_code">Request Sign In Code</string>
     <string name="sign_in_label_email">Email</string>
+    <string name="sign_in_label_code">Sign In Code</string>
     <string name="top_bar_title_sign_in">Sign In</string>
 </resources>
