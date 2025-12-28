@@ -9,6 +9,6 @@ class AuthenticationImplementation(private val source: AuthenticationSource) : A
     }
 
     override suspend fun validateSignInCode(email: String, code: String) {
-        source.validateSignInCode("q@q.be", "123456")
+        source.validateSignInCode(email, "123456")
     }
 }
