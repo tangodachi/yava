@@ -6,12 +6,12 @@ direction TB
 	        +invoke(email: String)
         }
 
-	}
-	namespace authentication {
-        class Authentication {
-	        requestSignInCode(email: String)
+        class ValidateSignInCode {
+	        +invoke(email: String, code: String)
         }
 
+	}
+	namespace authentication {
         class AuthenticationImplementation {
         }
 
@@ -22,12 +22,18 @@ direction TB
         class RemoteAuthenticationSource {
         }
 
+        class Authentication {
+	        requestSignInCode(email: String)
+	        validateSignInCode(email: String, code: String)
+        }
+
 	}
 
-	<<Interface>> Authentication
 	<<Interface>> AuthenticationSource
+	<<Interface>> Authentication
 
     RequestSignInCode --> Authentication
+    ValidateSignInCode --> Authentication
     AuthenticationImplementation ..|> Authentication
     AuthenticationImplementation --> AuthenticationSource
     RemoteAuthenticationSource ..|> AuthenticationSource

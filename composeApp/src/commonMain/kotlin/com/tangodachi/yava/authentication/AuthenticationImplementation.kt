@@ -7,4 +7,8 @@ class AuthenticationImplementation(private val source: AuthenticationSource) : A
     override suspend fun requestSignInCode(email: String) {
         source.requestSignInCode(email)
     }
+
+    override suspend fun validateSignInCode(email: String, code: String) {
+        TODO()
+    }
 }
