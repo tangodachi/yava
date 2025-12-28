@@ -6,7 +6,7 @@ import org.koin.core.annotation.Factory
 @Factory
 class ValidateSignInCode(private val authentication: Authentication) {
     suspend operator fun invoke(email: String, code: String) {
-        authentication.validateSignInCode(email, "123456")
+        authentication.validateSignInCode(email, code)
     }
 }
 
