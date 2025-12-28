@@ -41,7 +41,7 @@ class AuthenticationTest : KoinTest {
 
         authentication.requestSignInCode(expectedEmail)
 
-        assertTrue(authenticationSource.requestSignInCodeCalled)
+        assertTrue(authenticationSource.requestSignInCode)
         assertEquals(expectedEmail, authenticationSource.email)
     }
 
@@ -51,7 +51,19 @@ class AuthenticationTest : KoinTest {
 
         authentication.requestSignInCode(expectedEmail)
 
-        assertTrue(authenticationSource.requestSignInCodeCalled)
+        assertTrue(authenticationSource.requestSignInCode)
         assertEquals(expectedEmail, authenticationSource.email)
+    }
+
+    @Test
+    fun `expect source validateSignInCode on validateSignInCode`() = runTest {
+        val expectedEmail = "q@q.be"
+        val expectedCode = "123456"
+
+        authentication.validateSignInCode(expectedEmail, expectedCode)
+
+        assertTrue(authenticationSource.validateSignInCode)
+        assertEquals(expectedEmail, authenticationSource.email)
+        assertEquals(expectedCode, authenticationSource.code)
     }
 }

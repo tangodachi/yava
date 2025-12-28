@@ -5,19 +5,19 @@ class AuthenticationSourceMock : AuthenticationSource {
         private set
     var email: String? = null
         private set
-    var requestSignInCodeCalled = false
+    var requestSignInCode = false
         private set
-    var validateSignInCodeCalled = false
+    var validateSignInCode = false
         private set
 
     override suspend fun requestSignInCode(email: String) {
         this.email = email
-        this.requestSignInCodeCalled = true
+        this.requestSignInCode = true
     }
 
     override suspend fun validateSignInCode(email: String, code: String) {
         this.code = code
         this.email = email
-        this.validateSignInCodeCalled = true
+        this.validateSignInCode = true
     }
 }
