@@ -28,6 +28,15 @@ direction TB
 	        validateSignInCode(email: String, code: String)
         }
 
+        class RequestSignInCodeParameters {
+	        +email: String
+        }
+
+        class ValidateSignInCodeParameters {
+	        +code: String
+	        +email: String
+        }
+
 	}
 
 	<<Interface>> Authentication
@@ -38,4 +47,6 @@ direction TB
     AuthenticationImplementation ..|> Authentication
     AuthenticationImplementation --> AuthenticationSource
     RemoteAuthenticationSource ..|> AuthenticationSource
+    RemoteAuthenticationSource --> RequestSignInCodeParameters
+    RemoteAuthenticationSource --> ValidateSignInCodeParameters
 ```

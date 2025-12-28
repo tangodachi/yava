@@ -19,6 +19,11 @@ class RemoteAuthenticationSource(private val httpClient: HttpClient) : Authentic
     }
 
     override suspend fun validateSignInCode(email: String, code: String) {
-        TODO()
+        val parameters = ValidateSignInCodeParameters(email = email, code = code)
+
+        httpClient.post(AuthenticationApi.validateSignInCode) {
+            contentType(ContentType.Application.Json)
+            setBody(parameters)
+        }
     }
 }
