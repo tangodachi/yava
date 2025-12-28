@@ -1,6 +1,7 @@
 package com.tangodachi.yava.authentication
 
 import com.tangodachi.yava.AppModule
+import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -35,7 +36,7 @@ class AuthenticationTest : KoinTest {
     }
 
     @Test
-    fun `expect source requestSignInCode on requestSignInCode`() {
+    fun `expect source requestSignInCode on requestSignInCode`() = runTest {
         val expectedEmail = "q@q.be"
 
         authentication.requestSignInCode(expectedEmail)
@@ -45,7 +46,7 @@ class AuthenticationTest : KoinTest {
     }
 
     @Test
-    fun `expect source requestSignInCode on requestSignInCode with email 2`() {
+    fun `expect source requestSignInCode on requestSignInCode with email 2`() = runTest  {
         val expectedEmail = "e@e.be"
 
         authentication.requestSignInCode(expectedEmail)
