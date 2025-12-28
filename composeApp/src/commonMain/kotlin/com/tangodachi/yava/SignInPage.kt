@@ -24,6 +24,7 @@ import com.tangodachi.yava.usecase.RequestSignInCode
 import kotlinx.coroutines.launch
 import yava.composeapp.generated.resources.Res
 import yava.composeapp.generated.resources.sign_in_action_request_code
+import yava.composeapp.generated.resources.sign_in_action_sign_in
 import yava.composeapp.generated.resources.sign_in_label_code
 import yava.composeapp.generated.resources.sign_in_label_email
 
@@ -83,6 +84,15 @@ fun SignInPage(
                 .align(Alignment.End)
         ) {
             Text(stringResource(Res.string.sign_in_action_request_code))
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Button(
+            onClick = {},
+            modifier = Modifier.align(Alignment.End)
+        ) {
+            Text(stringResource(Res.string.sign_in_action_sign_in))
         }
     }
 }
