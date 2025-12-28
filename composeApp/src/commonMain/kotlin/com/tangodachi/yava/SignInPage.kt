@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,6 +19,7 @@ import com.tangodachi.design.TextField
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
 import com.tangodachi.yava.usecase.RequestSignInCode
+import kotlinx.coroutines.launch
 import yava.composeapp.generated.resources.Res
 import yava.composeapp.generated.resources.sign_in_action_request_code
 import yava.composeapp.generated.resources.sign_in_label_email
@@ -25,11 +27,16 @@ import yava.composeapp.generated.resources.sign_in_label_email
 @Composable
 fun SignInPage(requestSignInCode: RequestSignInCode = koinInject()) {
     var email by remember { mutableStateOf("") }
+    val scope = rememberCoroutineScope()
 
     SignInPage(
         email = email,
         onEmailChange = { email = it },
-        onRequest = { requestSignInCode(email) }
+        onRequest = {
+            scope.launch {
+                requestSignInCode(email)
+            }
+        }
     )
 }
 

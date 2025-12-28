@@ -20,7 +20,9 @@ fun Application.module() {
     cors()
 
     routing {
-        post("/requestSignInCode") {
+        post(AuthenticationApi.requestSignInCode) {
+            println("Received ${call.receive<RequestSignInCodeParameters>()}")
+
             call.respond(HttpStatusCode.OK)
         }
     }
