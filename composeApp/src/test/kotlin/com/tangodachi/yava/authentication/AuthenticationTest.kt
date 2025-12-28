@@ -23,7 +23,6 @@ class AuthenticationTest : KoinTest {
         modules(AppModule().module)
     }
 
-
     @Before
     fun setup() {
         MockProvider.register { clazz ->
@@ -71,6 +70,18 @@ class AuthenticationTest : KoinTest {
     fun `expect source validateSignInCode with email 2`() = runTest {
         val expectedEmail = "2@b.org"
         val expectedCode = "123456"
+
+        authentication.validateSignInCode(expectedEmail, expectedCode)
+
+        assertTrue(authenticationSource.validateSignInCode)
+        assertEquals(expectedEmail, authenticationSource.email)
+        assertEquals(expectedCode, authenticationSource.code)
+    }
+
+    @Test
+    fun `expect source validateSignInCode with code 2`() = runTest {
+        val expectedEmail = "q@q.be"
+        val expectedCode = "AABBBBBD"
 
         authentication.validateSignInCode(expectedEmail, expectedCode)
 
