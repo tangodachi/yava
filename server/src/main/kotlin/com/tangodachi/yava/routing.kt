@@ -16,5 +16,9 @@ fun Application.routing() {
 
             call.respond(HttpStatusCode.OK)
         }
+        post(AuthenticationApi.validateSignInCode) {
+            println("Received validate sign-in code request")
+            call.respond(HttpStatusCode.OK)
+        }
     }
 }
