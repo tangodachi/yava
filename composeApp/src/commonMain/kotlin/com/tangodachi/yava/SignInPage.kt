@@ -32,7 +32,7 @@ import yava.composeapp.generated.resources.sign_in_label_email
 fun SignInPage(requestSignInCode: RequestSignInCode = koinInject()) {
     var email by remember { mutableStateOf("") }
     val scope = rememberCoroutineScope()
-    var signInCodeVisible by remember { mutableStateOf(false) }
+    var signIncodeRequested by remember { mutableStateOf(false) }
 
     SignInPage(
         email = email,
@@ -40,10 +40,10 @@ fun SignInPage(requestSignInCode: RequestSignInCode = koinInject()) {
         onRequest = {
             scope.launch {
                 requestSignInCode(email)
-                signInCodeVisible = true
+                signIncodeRequested = true
             }
         },
-        signInCodeVisible = signInCodeVisible,
+        signIncodeRequested = signIncodeRequested,
     )
 }
 
@@ -52,7 +52,7 @@ fun SignInPage(
     email: String,
     onEmailChange: (String) -> Unit,
     onRequest: () -> Unit,
-    signInCodeVisible: Boolean,
+    signIncodeRequested: Boolean,
 ) {
     Column(
         Modifier
@@ -68,7 +68,7 @@ fun SignInPage(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        AnimatedVisibility(visible = signInCodeVisible) {
+        AnimatedVisibility(visible = signIncodeRequested) {
             TextField(
                 value = "",
                 onValueChange = {},
@@ -88,11 +88,13 @@ fun SignInPage(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Button(
-            onClick = {},
+        AnimatedVisibility(
+            visible = signIncodeRequested,
             modifier = Modifier.align(Alignment.End)
         ) {
-            Text(stringResource(Res.string.sign_in_action_sign_in))
+            Button(onClick = {}) {
+                Text(stringResource(Res.string.sign_in_action_sign_in))
+            }
         }
     }
 }
