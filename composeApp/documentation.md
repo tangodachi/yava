@@ -15,10 +15,6 @@ direction TB
         class AuthenticationImplementation {
         }
 
-        class AuthenticationSource {
-	        requestSignInCode(email: String)
-        }
-
         class RemoteAuthenticationSource {
         }
 
@@ -27,10 +23,15 @@ direction TB
 	        validateSignInCode(email: String, code: String)
         }
 
+        class AuthenticationSource {
+	        requestSignInCode(email: String)
+	        validateSignInCode(email: String, code: String)
+        }
+
 	}
 
-	<<Interface>> AuthenticationSource
 	<<Interface>> Authentication
+	<<Interface>> AuthenticationSource
 
     RequestSignInCode --> Authentication
     ValidateSignInCode --> Authentication
