@@ -17,6 +17,7 @@ fun main() {
 
 fun Application.module() {
     contentNegotiation()
+    cors()
 
     routing {
         post("/requestSignInCode") {
