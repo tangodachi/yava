@@ -1,7 +1,11 @@
 ```mermaid
+---
+config:
+  layout: elk
+---
 classDiagram
 direction TB
-	namespace usecase {
+	namespace `app.usecase` {
         class RequestSignInCode {
 	        +invoke(email: String)
         }
@@ -38,9 +42,34 @@ direction TB
         }
 
 	}
+	namespace `server.interactor` {
+        class RequestSignInCode_3["RequestSignInCode"] {
+	        +invoke(parameters:RequestSignInCodeParameters)
+        }
+
+        class ValidateSignInCode_3["ValidateSignInCode"] {
+	        +invoke(parameters: ValidateSignInCodeParameters)
+        }
+
+	}
+	namespace server {
+        class Configuration {
+        }
+
+	}
+	namespace `server.utils` {
+        class SendEmailImplementation {
+        }
+
+        class SendEmail {
+	        +invoke(recipient: String, sender: String, title: String, message: String)
+        }
+
+	}
 
 	<<Interface>> Authentication
 	<<Interface>> AuthenticationSource
+	<<Interface>> SendEmail
 
     RequestSignInCode --> Authentication
     ValidateSignInCode --> Authentication
@@ -49,4 +78,9 @@ direction TB
     RemoteAuthenticationSource ..|> AuthenticationSource
     RemoteAuthenticationSource --> RequestSignInCodeParameters
     RemoteAuthenticationSource --> ValidateSignInCodeParameters
+    RequestSignInCode_3 ..> RequestSignInCodeParameters
+    ValidateSignInCode_3 ..> ValidateSignInCodeParameters
+    RequestSignInCode_3 --> SendEmail
+    SendEmailImplementation ..|> SendEmail
+    SendEmailImplementation ..> Configuration
 ```
