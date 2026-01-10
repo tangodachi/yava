@@ -16,7 +16,7 @@ application {
 
 dependencies {
     implementation(projects.shared)
-    implementation(libs.logback)
+    implementation(libs.javax.mail)
     implementation(libs.koin.ktor)
     implementation(libs.koin.annotations)
     implementation(libs.kotlinx.serialization.json)
@@ -25,6 +25,7 @@ dependencies {
     implementation(libs.ktor.serverNetty)
     implementation(libs.ktor.server.contentNegotiation)
     implementation(libs.ktor.server.cors)
+    implementation(libs.logback)
 
     testImplementation(libs.koin.test)
     testImplementation(libs.koin.test.junit4)
