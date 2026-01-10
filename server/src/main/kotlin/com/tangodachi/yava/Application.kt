@@ -10,6 +10,7 @@ fun main() {
 }
 
 fun Application.module() {
+    koin()
     contentNegotiation()
     cors()
     routing()
