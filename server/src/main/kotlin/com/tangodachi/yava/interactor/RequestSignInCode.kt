@@ -11,7 +11,7 @@ class RequestSignInCode(
     private val sendEmail: SendEmail,
 ) {
     suspend operator fun invoke(parameters: RequestSignInCodeParameters) {
-        sendEmail("q@q.be", "", "", generateCode())
+        sendEmail(parameters.email, "", "", generateCode())
     }
 }
 
