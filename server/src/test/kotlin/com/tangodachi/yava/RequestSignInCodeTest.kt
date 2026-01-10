@@ -65,4 +65,15 @@ class RequestSignInCodeTest : KoinTest {
         assertTrue(sendEmail.invoked)
         assertEquals(expected = sendEmail.message, actual = expected)
     }
+
+    @Test
+    fun `expect send sign in code with email 2`() = runTest {
+        val expected = "john.doe@email.org"
+        val parameters = RequestSignInCodeParameters(email = expected)
+
+        generateCode.code = String()
+        requestSignInCode(parameters = parameters)
+
+        assertEquals(expected = sendEmail.recipient, actual = expected)
+    }
 }
