@@ -4,7 +4,7 @@ import org.koin.core.annotation.Factory
 
 @Factory(binds = [GenerateCode::class])
 class GenerateCodeImplementation : GenerateCode {
-    override fun invoke(): String {
+    override operator fun invoke(): String {
         TODO()
     }
 }

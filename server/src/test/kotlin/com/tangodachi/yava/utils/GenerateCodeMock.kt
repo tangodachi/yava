@@ -6,5 +6,5 @@ import org.koin.core.annotation.Factory
 class GenerateCodeMock : GenerateCode {
     lateinit var code: String
 
-    override fun invoke(): String = code
+    override operator fun invoke(): String = code
 }
