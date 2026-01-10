@@ -65,11 +65,19 @@ direction TB
 	        +invoke(recipient: String, sender: String, title: String, message: String)
         }
 
+        class GenerateCode {
+	        invoke() : String
+        }
+
+        class GenerateCodeImplementation {
+        }
+
 	}
 
 	<<Interface>> Authentication
 	<<Interface>> AuthenticationSource
 	<<Interface>> SendEmail
+	<<Interface>> GenerateCode
 
     RequestSignInCode --> Authentication
     ValidateSignInCode --> Authentication
@@ -83,4 +91,6 @@ direction TB
     RequestSignInCode_3 --> SendEmail
     SendEmailImplementation ..|> SendEmail
     SendEmailImplementation ..> Configuration
+    RequestSignInCode_3 --> GenerateCode
+    GenerateCodeImplementation ..|> GenerateCode
 ```
