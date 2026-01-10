@@ -2,10 +2,12 @@ package com.tangodachi.yava.interactor
 
 import com.tangodachi.yava.authentication.RequestSignInCodeParameters
 import com.tangodachi.yava.utils.SendEmail
+import org.koin.core.annotation.Factory
 
+@Factory
 class RequestSignInCode(private val sendEmail: SendEmail) {
-    operator fun invoke(parameters: RequestSignInCodeParameters) {
-        TODO()
+    suspend operator fun invoke(parameters: RequestSignInCodeParameters) {
+        sendEmail("q@q.be", "", "", "AAAABBBB")
     }
 }
 
