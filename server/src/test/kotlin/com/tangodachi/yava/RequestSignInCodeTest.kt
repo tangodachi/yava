@@ -127,4 +127,15 @@ class RequestSignInCodeTest : KoinTest {
 
         assertEquals(expected = expected, actual = sendEmail.sender)
     }
+
+    @Test
+    fun `expect send sign in code title`() = runTest {
+        val expected = "Yava Sign In Code"
+        val parameters = RequestSignInCodeParameters(email = String())
+
+        generateCode.code = String()
+        requestSignInCode(parameters = parameters)
+
+        assertEquals(expected = expected, actual = sendEmail.title)
+    }
 }
