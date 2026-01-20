@@ -16,7 +16,7 @@ class RequestSignInCode(
         sendEmail(
             recipient = parameters.email,
             sender = configuration.notification.email.address,
-            title = "",
+            title = "Yava Sign In Code",
             message = """
                 Hello,
 
