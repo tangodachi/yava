@@ -92,4 +92,17 @@ class RequestSignInCodeTest : KoinTest {
 
         assertEquals(expected = expected, actual = sendEmail.sender)
     }
+
+    @Test
+    fun `expect send sign in code from sender 2`() = runTest {
+        val expected = "john.doe@email.org"
+        val parameters = RequestSignInCodeParameters(email = String())
+
+        declare<Configuration> { mockConfiguration(notificationEmail = expected) }
+        generateCode.code = String()
+
+        requestSignInCode(parameters = parameters)
+
+        assertEquals(expected = expected, actual = sendEmail.sender)
+    }
 }
