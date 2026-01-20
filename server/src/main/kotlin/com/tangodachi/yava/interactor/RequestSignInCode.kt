@@ -1,5 +1,6 @@
 package com.tangodachi.yava.interactor
 
+import com.tangodachi.yava.Configuration
 import com.tangodachi.yava.authentication.RequestSignInCodeParameters
 import com.tangodachi.yava.utils.GenerateCode
 import com.tangodachi.yava.utils.SendEmail
@@ -13,7 +14,7 @@ class RequestSignInCode(
     suspend operator fun invoke(parameters: RequestSignInCodeParameters) {
         sendEmail(
             recipient = parameters.email,
-            sender = "",
+            sender = "q@q.be",
             title = "",
             message = generateCode()
         )

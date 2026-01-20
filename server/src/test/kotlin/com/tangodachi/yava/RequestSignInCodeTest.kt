@@ -6,6 +6,7 @@ import com.tangodachi.yava.utils.GenerateCode
 import com.tangodachi.yava.utils.GenerateCodeMock
 import com.tangodachi.yava.utils.SendEmail
 import com.tangodachi.yava.utils.SendEmailMock
+import com.tangodachi.yava.utils.mockConfiguration
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Rule
@@ -15,6 +16,7 @@ import org.koin.test.KoinTest
 import org.koin.test.KoinTestRule
 import org.koin.test.inject
 import org.koin.test.mock.MockProvider
+import org.koin.test.mock.declare
 import org.koin.test.mock.declareMock
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
@@ -40,6 +42,7 @@ class RequestSignInCodeTest : KoinTest {
         }
         declareMock<GenerateCode> { generateCode }
         declareMock<SendEmail> { sendEmail }
+        declare<Configuration> { mockConfiguration() }
     }
 
     @Test
@@ -75,5 +78,18 @@ class RequestSignInCodeTest : KoinTest {
         requestSignInCode(parameters = parameters)
 
         assertEquals(expected = sendEmail.recipient, actual = expected)
+    }
+
+    @Test
+    fun `expect send sign in code from sender 1`() = runTest {
+        val expected = "q@q.be"
+        val parameters = RequestSignInCodeParameters(email = String())
+
+        declare<Configuration> { mockConfiguration(notificationEmail = expected) }
+        generateCode.code = String()
+
+        requestSignInCode(parameters = parameters)
+
+        assertEquals(expected = expected, actual = sendEmail.sender)
     }
 }
