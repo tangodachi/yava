@@ -17,7 +17,17 @@ class RequestSignInCode(
             recipient = parameters.email,
             sender = configuration.notification.email.address,
             title = "",
-            message = generateCode()
+            message = """
+                Hello,
+
+                Your sign-in code is: ${generateCode()}
+        
+                Please use this code to complete your sign-in process.
+        
+                Enjoy!
+        
+                Your Yava Team
+            """.trimIndent(),
         )
     }
 }

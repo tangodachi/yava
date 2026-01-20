@@ -47,10 +47,21 @@ class RequestSignInCodeTest : KoinTest {
 
     @Test
     fun `expect send sign in code 1`() = runTest {
-        val expected = "AAAABBBB"
+        val code = "AAAABBBB"
+        val expected = """
+            Hello,
+
+            Your sign-in code is: $code
+
+            Please use this code to complete your sign-in process.
+
+            Enjoy!
+
+            Your Yava Team
+        """.trimIndent()
         val parameters = RequestSignInCodeParameters(email = "q@q.be")
 
-        generateCode.code = expected
+        generateCode.code = code
         requestSignInCode(parameters = parameters)
 
         assertTrue(sendEmail.invoked)
@@ -59,10 +70,21 @@ class RequestSignInCodeTest : KoinTest {
 
     @Test
     fun `expect send sign in code 2`() = runTest {
-        val expected = "1234EFGH"
+        val code = "1234EFGH"
+        val expected = """
+            Hello,
+
+            Your sign-in code is: $code
+
+            Please use this code to complete your sign-in process.
+
+            Enjoy!
+
+            Your Yava Team
+        """.trimIndent()
         val parameters = RequestSignInCodeParameters(email = "q@q.be")
 
-        generateCode.code = expected
+        generateCode.code = code
         requestSignInCode(parameters = parameters)
 
         assertTrue(sendEmail.invoked)
